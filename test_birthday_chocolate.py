@@ -12,6 +12,13 @@ class BirthdayChocolateTest(unittest.TestCase):
     def setUp(self):
         self.calculator = birthday_chocolate.BirthdayChocolate()
 
-    def test_y(self):
+    def test_solve(self):
         for values in TEST_COLLECTION:
             self.assertEqual(values[4], self.calculator.solve(values[0], values[1], values[2], values[3]))
+
+    def test_check_constraint(self):
+        self.assertFalse(self.calculator.check_constraints(0, [4], 4, 1))
+        self.assertFalse(self.calculator.check_constraints(1, [6], 4, 1))
+        self.assertFalse(self.calculator.check_constraints(1, [4], 32, 1))
+        self.assertFalse(self.calculator.check_constraints(1, [4], 4, 13))
+        self.assertTrue(self.calculator.check_constraints(1, [4], 4, 1))
